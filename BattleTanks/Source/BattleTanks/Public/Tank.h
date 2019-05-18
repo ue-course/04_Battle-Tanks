@@ -29,6 +29,8 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -52,4 +54,8 @@ public:
 
 	// Local barrel reference for spawing projectile
 	UTankBarrel* Barrel = nullptr; 
+
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0;
 };
