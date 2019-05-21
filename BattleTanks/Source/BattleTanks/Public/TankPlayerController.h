@@ -11,7 +11,7 @@
 class ATank;
 
 /**
- * 
+ *
  */
 UCLASS()
 class BATTLETANKS_API ATankPlayerController : public APlayerController
@@ -25,13 +25,13 @@ public:
 private:
 
 	UPROPERTY(EditDefaultsOnly)
-	float CrossHairXLocation = 0.5;
+		float CrossHairXLocation = 0.5;
 
 	UPROPERTY(EditDefaultsOnly)
-	float CrossHairYLocation = 0.33333;
+		float CrossHairYLocation = 0.33333;
 
 	UPROPERTY(EditDefaultsOnly)
-	float LineTraceRange = 1000000;
+		float LineTraceRange = 1000000;
 
 	ATank* GetControlledTank() const;
 
