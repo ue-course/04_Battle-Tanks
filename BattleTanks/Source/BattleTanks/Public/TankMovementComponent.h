@@ -32,6 +32,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void IntendMoveBackward(float Throw);
 
+	// Called from the pathfinding logic by the AI controllers
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
+
 private:
 	UTankTrack* LeftTrack = nullptr;
 	UTankTrack* RightTrack = nullptr;
