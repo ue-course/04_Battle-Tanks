@@ -17,12 +17,17 @@ ATank::ATank()
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 	//TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s DUCK Tank cpp Construct"), *TankName)
 }
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
+
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s DUCK Tank cpp BeginPlay"), *TankName)
 	
 }
 
@@ -33,14 +38,16 @@ void ATank::Tick(float DeltaTime)
 
 void ATank::AimAt(FVector HitLocation)
 {
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
+	if (!ensure(Barrel)) { return; }
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 
-	if (Barrel && isReloaded) 
+	if (isReloaded) 
 	{ 
 		//spawn a projectileat the socket location on the barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
