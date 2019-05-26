@@ -4,14 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "Engine/World.h"
-#include "Components/StaticMeshComponent.h"
 #include "Tank.generated.h"
 
 // Forward declarations
-class UTankBarrel;
-class UTankTurret;
-class AProjectile;
 
 UCLASS()
 class BATTLETANKS_API ATank : public APawn
@@ -29,22 +24,4 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION(BlueprintCallable, Category = Firing)
-		void Fire();
-
-	// TODO once firing is moved to aiming component
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-		float LaunchSpeed = 4000;
-
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-		float ReloadTimeInSeconds = 3;
-
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
-		TSubclassOf<AProjectile> ProjectileBlueprint; // doesn't need to be a pointer 'cause thats built into the tsubclass
-
-	// Local barrel reference for spawing projectile
-	UTankBarrel* Barrel = nullptr; // TODO remove
-
-	double LastFireTime = 0;
 };
