@@ -51,18 +51,19 @@ public:
 	float LaunchSpeed = 4000;
 
 	void MoveBarrelTowards(FVector AimDirection);
-
+	bool IsBarrelMoving();
 protected:
 	virtual void BeginPlay() override;
-
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	
 	UPROPERTY(BlueprintReadOnly, Category = Status)
 	EFiringStatus FiringState = EFiringStatus::Reloading;
 
 private:
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
-
+	
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
+	FVector AimDirection;
 
 	double LastFireTime = 0;
 };
